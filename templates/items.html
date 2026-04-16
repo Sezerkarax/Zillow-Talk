@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Προϊόντα | Zillow-Talk</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../static/style.css">
+
+
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <a href="homepage.html" class="logo"><i class="fas fa-cloud"></i><span>Zillow-Talk</span></a>
+            <nav class="nav">
+                <a href="homepage.html" class="nav-link">Αρχική</a>
+                <a href="items.html" class="nav-link active">Προϊόντα</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="page-header"><h1>Η Συλλογή μας</h1></section>
+
+    <section class="search-section">
+        <div class="search-box">
+            <i class="fas fa-search"></i>
+            <input type="text" id="searchInput" placeholder="Αναζήτηση μαξιλαριού (π.χ. Cloud)...">
+            <button class="search-btn" id="searchBtn">Αναζήτηση</button>
+        </div>
+    </section>
+
+    <section class="products-grid" id="productsGrid"></section>
+
+    <footer class="footer">
+        <p>© 2025 Zillow-Talk. Developed by:</p>
+        <p class="team-names">Σεζέρ Καραχότζα | Θανάσης Γεωργόπουλος | Γιάννης Δούμπλας</p>
+    </footer>
+
+    <script src="../static/items.js"></script>
+</body>
+</html>
