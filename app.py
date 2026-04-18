@@ -12,7 +12,7 @@ from flask import Flask, request, jsonify
 from flask_pymongo import PyMongo
 from flask_cors import CORS
 from bson import ObjectId
-import numpy as np
+
 
 app = Flask(__name__)
 CORS(app)
@@ -34,13 +34,14 @@ def init():
         "Προηγμένος αφρός μνήμης (Memory Foam) που εκμηδενίζει τις πιέσεις και αγκαλιάζει το σώμα.",
         "Καινοτόμο Cooling Gel που διατηρεί την επιφάνεια δροσερή, ιδανικό για ζεστά κλίματα."
     ]
+    prices=[40,20,25,35,45,30,35,50,40,50,50,65,115,65,40,75,40,60,20,45]
     for i in range(20):
         product={
             "name": f"{pillows[i]} Pillow {i+1}",
             "image": f"/static/images/{i+1}.jpg",
             "description": descriptions[i%8],
             "likes": 0,
-            "price": int(np.random.randint(5, 100)),
+            "price": prices[i]
         }
         data.append(product)
     mongo.db.products.insert_many(data) #add data
