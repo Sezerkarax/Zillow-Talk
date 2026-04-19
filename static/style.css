@@ -9,6 +9,38 @@
     --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.1); --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.15); --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.2);
 }
 
+/* ================== Slider Controls ================  */
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  padding: 16px;
+  margin-top: -22px;
+  color: white;
+  background-color: rgba(0,0,0,0.5);
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+}
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+.prev:hover, .next:hover {
+  background-color: rgba(0,0,0,0.8);
+}
+.fade {
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+@keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+
 /* 2. ΓΕΝΙΚΟΙ ΚΑΝΟΝΕΣ & SCROLLBAR */
 ::-webkit-scrollbar { width: 8px; }
 ::-webkit-scrollbar-track { background: var(--navy-dark); }
@@ -42,8 +74,8 @@ img { max-width: 100%; height: auto; display: block; transition: transform 0.5s 
 /* 5. SLIDESHOW (homepage.html) */
 .slideshow-section { padding: 80px 24px; background: var(--off-white); }
 .slideshow-container { position: relative; max-width: 1000px; margin: 0 auto; border-radius: 24px; overflow: hidden; box-shadow: var(--shadow-lg); border: 1px solid rgba(0,0,0,0.05); }
-.slides-wrapper { display: flex; width: 500%; animation: slide-animation 25s infinite; }
-.slide { width: 20%; position: relative; aspect-ratio: 16/9; }
+.slides-wrapper { display: block; width: 100%; }
+.slide { width: 100%; position: relative; aspect-ratio: 16/9; }
 .slide img { width: 100%; height: 100%; object-fit: cover; }
 .slide-overlay { position: absolute; bottom: 0; left: 0; right: 0; padding: 60px 40px 40px; background: linear-gradient(to top, rgba(10, 22, 40, 0.9), transparent); color: var(--white); }
 .slide-overlay h3 { font-family: var(--font-heading); font-size: 2rem; }
@@ -95,4 +127,11 @@ img { max-width: 100%; height: auto; display: block; transition: transform 0.5s 
     60%, 75% { transform: translateX(-60%); }
     80%, 95% { transform: translateX(-80%); }
     100% { transform: translateX(0); }
+}
+
+
+.product-card .product-image-container img {
+    width: 100%;
+    height: 270px;
+    object-fit: cover;
 }

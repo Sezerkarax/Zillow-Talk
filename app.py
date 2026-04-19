@@ -38,7 +38,7 @@ def init():
     for i in range(20):
         product={
             "name": f"{pillows[i]} Pillow {i+1}",
-            "image": f"/static/images/{i+1}.jpg",
+            "image": f"./../static/images/{i+1}.jpg",
             "description": descriptions[i%8],
             "likes": 0,
             "price": prices[i]
