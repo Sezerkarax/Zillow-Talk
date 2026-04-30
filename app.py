@@ -23,7 +23,7 @@ mongo = PyMongo(app)
 def init():
     mongo.db.products.delete_many({}) #delete previous data
     data=[]
-    pillows=["Latex","Cotton","Wool","Buckwheat","Kapok","Microbeads","Memory Foam","Cooling Gel","Latex","Cotton","Wool","Buckwheat","Kapok","Microbeads","Memory Foam","Cooling Gel","Latex","Cotton","Wool","Buckwheat"]
+    pillows=["Latex","Cotton","Wool","Buckwheat","Kapok","Microbeads","Memory Foam","Cooling Gel","Latex","Cotton","Wool","Buckwheat","Kapok","Microbeads","Memory Foam","Cooling Gel","Latex","Cotton","Wool","Buckwheat","Cat"]
     descriptions = [
         "Φυσικό Latex με ελαστική δομή που αναπνέει και προσφέρει τέλεια στήριξη στον αυχένα.",
         "Κλασικό βαμβακερό μαξιλάρι από 100% αγνό βαμβάκι για απόλυτη απαλότητα και δροσιά.",
@@ -34,7 +34,7 @@ def init():
         "Προηγμένος αφρός μνήμης (Memory Foam) που εκμηδενίζει τις πιέσεις και αγκαλιάζει το σώμα.",
         "Καινοτόμο Cooling Gel που διατηρεί την επιφάνεια δροσερή, ιδανικό για ζεστά κλίματα."
     ]
-    prices=[40,20,25,35,45,30,35,50,40,50,50,65,115,65,40,75,40,60,20,45]
+    prices=[40,20,25,35,45,30,35,50,40,50,50,65,115,65,40,75,40,60,20,45,30]
     for i in range(20):
         product={
             "name": f"{pillows[i]} Pillow {i+1}",
@@ -44,6 +44,15 @@ def init():
             "price": prices[i]
         }
         data.append(product)
+
+    product= {"name": f"{pillows[20]} Pillow {21}", #for unique cat pillow
+             "image": f"./../static/images/{21}.jpg",
+             "description": "Παχουλός χνουδωτός φίλος",
+             "likes": 0,
+             "price": prices[20]}
+
+    data.append(product)
+
     mongo.db.products.insert_many(data) #add data
     return jsonify({"message": "Products inserted"})
 @app.route("/search", methods=["GET"])
