@@ -11,7 +11,7 @@
 from flask import Flask, request, jsonify
 from flask_pymongo import PyMongo
 from flask_cors import CORS
-from bson import ObjectId
+
 
 
 app = Flask(__name__)
@@ -37,6 +37,7 @@ def init():
     prices=[40,20,25,35,45,30,35,50,40,50,50,65,115,65,40,75,40,60,20,45,30]
     for i in range(20):
         product={
+            "_id": str(i+1), #unique id for each product
             "name": f"{pillows[i]} Pillow {i+1}",
             "image": f"./../static/images/{i+1}.jpg",
             "description": descriptions[i%8],
@@ -45,7 +46,9 @@ def init():
         }
         data.append(product)
 
-    product= {"name": f"{pillows[20]} Pillow {21}", #for unique cat pillow
+    product= {
+             "_id": "21",
+             "name": f"{pillows[20]} Pillow {21}", #for cat pillow
              "image": f"./../static/images/{21}.jpg",
              "description": "Παχουλός χνουδωτός φίλος",
              "likes": 0,
@@ -62,19 +65,15 @@ def search():
         query={} #show everything
    else:
         query = {"name": {"$regex": name, "$options": "i"}} #regex finds if value of name is included, options i,for no case sensitive
-   toShow=mongo.db.products.find(query).sort("price", -1) #short descending according to price
-   results=[]
-   for product in toShow:
-       product["_id"] = str(product["_id"]) #covert object id to string (mongo.db.products.find returns type cursor, jsonify expects list)
-       results.append(product)
-   return jsonify(results)
+   toShow=list(mongo.db.products.find(query).sort("price", -1)) #short descending according to price, convert to list (mongo.db.products.find returns type cursor, jsonify expects list)
+   return jsonify(toShow)
 
 @app.route("/like",methods=["POST"])
 def like():
     data=request.get_json()
     id=data.get("id")  #get id from db
     mongo.db.products.update_one(
-        {"_id": ObjectId(id)},
+        {"_id": str(id)},
         {"$inc": {"likes": 1}} #$inc to increment likes by 1
     )
     return jsonify({"message": "Like added!"})
@@ -82,12 +81,8 @@ def like():
 
 @app.route("/popular",methods=["GET"])
 def popular():
-    top5List=[]
-    top5Cursor=mongo.db.products.find().sort("likes", -1).limit(5) #find top 5 based on likes (descending)
-    for product in top5Cursor:
-        product["_id"] = str(product["_id"])  # covert object id to string (mongo.db.products.find returns type cursor, jsonify expects list)
-        top5List.append(product)
-    return jsonify(top5List)
+    top5=list(mongo.db.products.find().sort("likes", -1).limit(5)) #find top 5 based on likes (descending), convert to list (mongo.db.products.find returns type cursor, jsonify expects list)
+    return jsonify(top5)
 
 if __name__ == "__main__":
     app.run(debug=True)
