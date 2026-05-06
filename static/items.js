@@ -88,6 +88,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         <img src="${product.image}" alt="${product.name}" style="width: 100%; max-height: 400px; object-fit: contain;">
                         <div class="slide-caption" style="text-align: center; margin-top: 10px;">
                             <h3>${product.name}</h3>
+                            <h3>Likes: ${product.likes}</h3>
                         </div>
                     `;
                     popularSlideshow.appendChild(slide);
